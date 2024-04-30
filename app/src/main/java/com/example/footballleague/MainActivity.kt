@@ -21,11 +21,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.room.Room
 import com.example.footballleague.ui.theme.FootBallLeagueTheme
 
+lateinit var db: AppDatabase
+lateinit var userDao: FootballDao
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        db = Room.databaseBuilder(
+            this, AppDatabase::class.java,
+            "mydatabase"
+        ).build()
+        userDao = db.getDao()
         setContent {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
